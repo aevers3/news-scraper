@@ -40,28 +40,29 @@ app.get("/scrape", function (req, res) {
 
         var $ = cheerio.load(response.data);
 
-        var results = [];
+        var result = {};
 
         $("article > div > div > a").each(function (i, element) {
-            var title = $(element).children('div').text();
-
             // Checks for summaries stored in lists and paragraphs, then scrapes accordingly.
             // If neither, the summary will say there is no preview available. In these cases, there generally is not a summary.
-            if ($(element).find('li').text()) {
-                var summary = $(element).find('ul').text();
-            } else if ($(element).find('p').text()) {
-                var summary = $(element).find('p').text();
+
+            result.title = $(this).children('div').text();
+
+            if ($(this).find('ul').text()) {
+                result.summary = $(element).find('ul').text();
+            } else if ($(this).find('p').text()) {
+                result.summary = $(element).find('p').text();
             } else {
-                var summary = 'No Article Preview Available.'
+                result.summary = 'No Article Preview Available.'
             }
 
-            results.push({
-                title: title,
-                summary: summary
-            });
-        });
+            result.link = $(this).attr('href');
+            console.log(result);
 
-        console.log(results);
+            // Create a new Article using the `result` object built from scraping
+            
+
+        });
     });
 });
 
