@@ -27,7 +27,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Set up mongo for heroku deployment
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/nyt-scraper-db";
 
 // Connect to the Mongo DB
 mongoose.connect(MONGODB_URI);
@@ -55,14 +55,24 @@ app.get("/scrape", function (req, res) {
             } else {
                 result.summary = 'No Article Preview Available.'
             }
-
-            result.link = $(this).attr('href');
+            // Add the domain, which is excluded from the scraped data
+            result.link = 'https://www.nytimes.com/' + $(this).attr('href');
             console.log(result);
 
             // Create a new Article using the `result` object built from scraping
-            
-
+            db.Article.create(result)
+                .then(function (dbArticle) {
+                    // View the added result in the console
+                    console.log(dbArticle);
+                })
+                .catch(function (err) {
+                    // If an error occurred, log it
+                    console.log(err);
+                });
         });
+        
+        // Send a message to the client
+        res.send("Scrape Complete");
     });
 });
 
