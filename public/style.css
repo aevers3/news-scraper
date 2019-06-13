@@ -1,0 +1,40 @@
+body {
+    background-color: #999;
+    background-image: url(images/45degreee_fabric.png);
+}
+
+p {
+    color: #ccc;
+}
+
+.page-header-text {
+
+}
+
+.container {
+    background-color: rgba(17, 17, 17, 0.7);
+}
+
+.headline-container {
+    min-height: 50px;
+}
+
+.article {
+    min-height: 100px;
+    border-bottom: 1px solid #ccc;
+}
+
+.article-link {
+    font-size: 25px;
+    text-decoration: none;
+}
+
+.article-summary {
+    font-size: 16px;
+}
+
+/* Note Input Styling */
+.note {
+    display: flex;
+    justify-content: center;
+}
