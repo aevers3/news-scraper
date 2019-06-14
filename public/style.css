@@ -7,8 +7,9 @@ p {
     color: #ccc;
 }
 
-.page-header-text {
-
+.page-header-text, h3 {
+    font-family: 'Courier New', Courier, monospace;
+    color: #ccc;
 }
 
 .container {
@@ -39,6 +40,11 @@ p {
 }
 
 .note {
-    display: flex;
-    justify-content: center;
+    width: 70%;
+    min-width: 390px;
+    height: auto;
+}
+
+#titleInput, #bodyInput {
+    width: 100%;
 }

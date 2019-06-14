@@ -15,11 +15,13 @@ $(document).on('click', '.note-button', function () {
         .then(function (data) {
             console.log(data);
             // Input for note title
-            $('.note[id=' + thisID + ']').append("<input id='titleInput' class='m-3' name='title' ><br>");
+            $('.note[id=' + thisID + ']').append("<input id='titleInput' class='mb-3' name='title' >");
             // Text area for note body
-            $('.note[id=' + thisID + ']').append("<textarea id='bodyInput' class='mb-3 mx-3' name='body'></textarea><br>");
+            $('.note[id=' + thisID + ']').append("<textarea id='bodyInput' class='mb-3' name='body'></textarea>");
+            // Container for submit button (To help with centering)
+            $('.note[id=' + thisID + ']').append("<div class='d-flex justify-content-center' id='button-container'></div>");
             // Submit button for note
-            $('.note[id=' + thisID + ']').append("<button data-id='" + data._id + "' id='saveNote'>Save Note</button>");
+            $('#button-container').append("<button data-id=" + data._id + " class='text-center btn btn-outline-success mb-3' id='saveNote'>Save Note</button>");
 
             // If there's a note saved for the article...
             if (data.note) {
