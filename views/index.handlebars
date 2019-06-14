@@ -1,0 +1,20 @@
+<div class="articles-container">
+    {{#each article}}
+    <div class="article m-3">
+        <div class="row">
+            <div class="col-sm-9 headline-container">
+                <a href='{{link}}' target="_blank" class="article-link">{{title}}</a>
+            </div>
+            <div class="col-sm-9">
+                <p class="article-summary">{{summary}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center">
+                <button class="note-button btn btn-outline-success m-3" data-id="{{_id}}">Open Notes</button>
+            </div>
+        </div>
+        <div class="note" id="{{_id}}"></div>
+    </div>
+    {{/each}}
+</div>

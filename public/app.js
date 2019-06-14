@@ -1,6 +1,9 @@
+// Onclick for Open Notes Button
 $(document).on('click', '.note-button', function () {
-    // Clear out notes div before displaying new info
+    // Clear out notes div before displaying new info (just in case)
     $('#notes').empty();
+    // Hide open notes button when notes are open. This prevents duplicates.
+    $(this).hide();
     // Grab ID from p tag
     var thisID = $(this).attr("data-id");
     console.log(thisID)
@@ -11,8 +14,6 @@ $(document).on('click', '.note-button', function () {
         // Once we get the article data by ID, build out note components
         .then(function (data) {
             console.log(data);
-            // Title of article
-            $('.note[id=' + thisID + ']').append(`<h4>${data.title}</h4>`);
             // Input for note title
             $('.note[id=' + thisID + ']').append("<input id='titleInput' class='m-3' name='title' ><br>");
             // Text area for note body
@@ -50,8 +51,9 @@ $(document).on('click', '#saveNote', function () {
         .then(function (data) {
             // Log the response
             console.log(data);
-            // Empty the notes section
+            // Empty the notes section and bring back the 'open notes' button.
             $(".note").empty();
+            $('.note-button').show();
         });
 
     // Lastly, empty out the text in the note.
@@ -75,36 +77,38 @@ $('#scrape-articles-btn').on('click', function () {
         url: "/scrape"
     }).then(function (data) {
         console.log(data, 'scrape data')
-        // --------------------------
-        // Maybe something here ???
-        // --------------------------
-    }).then(
-
+    }).then(function() {
+        
         // get json from the /articles route, which should contain any new articles
         $.getJSON("/articles", function (data) {
             // Iterate through data
             for (let i = 0; i < data.length; i++) {
+                // The HTML below matches index.handlebarse
                 $('.articles-container').append(
                     `<div class="article m-3">
                     <div class="row">
-                        <div class="col-12 headline-container">
-                            <a href='${data[i]._id}' target="_blank" class="article-link">${data[i].title}</a>
+                        <div class="col-sm-9 headline-container">
+                            <a href='${data[i].link}' target="_blank" class="article-link">${data[i].title}</a>
                         </div>
-                    </div>
-                    <div class="row summary">
                         <div class="col-sm-9">
                             <p class="article-summary">${data[i].summary}</p>
                         </div>
-                        <div class="col-sm-3">
-                            <button class="note-button" data-id="${data[i]._id}">Open Notes</button>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-center">
+                            <button class="note-button btn btn-outline-success m-3" data-id="${data[i]._id}">Open Notes</button>
                         </div>
                     </div>
                     <div class="note" id="${data[i]._id}"></div>
                 </div>`
                 );
             }
+            // ${data[i].link}
+            // ${data[i].title}
+            // ${data[i].summary}
+            // ${data[i]._id}
             console.log(data, 'article data');
         })
-    )
+    })
 })
 

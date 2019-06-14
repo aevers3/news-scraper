@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>NYT Scraper</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		type="text/css">
+	<link rel="stylesheet" href="./style.css" type="text/css" />
+</head>
+
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-12 text-center">
+				<h1 class="page-header-text">NYT Scraper</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12 text-center">
+				<h3 class="page-subhead-text">The news... scraped just for you</h3>
+			</div>
+		</div>
+		<div class="row buttons-container text-center">
+			<div class="col-md-6">
+				<button type="button" class="btn btn-outline-success m-3" id="scrape-articles-btn">Scrape New
+					Articles</button>
+			</div>
+			<div class="col-md-6 text-center">
+				<button type="button" class="btn btn-outline-danger m-3" id="clear-articles-btn">Clear Articles</button>
+			</div>
+		</div>
+	</div>
+
+	{{!-- Articles render here --}}
+	<div class="container">
+		<div class="row">
+			{{{ body }}}
+		</div>
+	</div>
+
+	{{!-- Scripts --}}
+	<script src="https://code.jquery.com/jquery.js"></script>
+	<script src="./app.js"></script>
+
+</body>
+
+</html>

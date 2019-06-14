@@ -34,6 +34,10 @@ p {
 }
 
 /* Note Input Styling */
+.note-button {
+    width: 50%;
+}
+
 .note {
     display: flex;
     justify-content: center;
