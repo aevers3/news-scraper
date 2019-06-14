@@ -3,7 +3,7 @@ $(document).on('click', '.note-button', function () {
     // Clear out notes div before displaying new info (just in case)
     $('#notes').empty();
     // Hide open notes button when notes are open. This prevents duplicates.
-    $(this).hide();
+    $('.note-button').hide();
     // Grab ID from p tag
     var thisID = $(this).attr("data-id");
     console.log(thisID)
@@ -101,7 +101,9 @@ $('#scrape-articles-btn').on('click', function () {
                             <button class="note-button btn btn-outline-success m-3" data-id="${data[i]._id}">Open Notes</button>
                         </div>
                     </div>
-                    <div class="note" id="${data[i]._id}"></div>
+                    <div class="note-container d-flex justify-content-center">
+                        <div class="note" id="${data[i]._id}"></div>
+                    </div>
                 </div>`
                 );
             }
